@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>D3 example</title>
-</head>
-<body>
-    <svg id="svg" width='500' height='500'>
-        <!-- SVG Objects here! -->
+  </head>
+  <body>
+    <svg id="svg" width="500" height="500">
+      <!-- SVG Objects here! -->
     </svg>
 
     <div id="viz">
-        <!-- D3 elements here! -->
+      <!-- D3 elements here! -->
     </div>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script>
-        d3
-          .select('#svg')
-          .selectAll('circle')
-          .data([5, 6, 2, 8, 4, 9, 1])
-          .enter()
-          .append('circle')
-          .attr('r', (n, i) => `${i * 10}px`)
-          .attr('cx', (n, i) => `${i * 100}px`)
-          .attr('cy', '250px')
-          .attr('cy', '250px')
-          .attr('fill', '#f35f32')
+      //Draws circles
+      d3.select("#svg")
+        .style('border', '1px solid')
+        .selectAll("circle")
+        .data([5, 6, 2, 8, 4, 9, 1])
+        .enter()
+        .append("circle")
+        .attr("r", "30px")
+        .attr("cx", (n, i) => `${i * 100}px`)
+        .attr("cy", val => `${val / 10 * 500}px`)
+        .attr("fill", "rgba(255, 0, 0, 0.5)")
+        .attr("storke-width", "3px")
+        .attr("stroke", "black");
 
-        d3
-          .select('#viz')
-          .selectAll('div')
-          .data([5, 6, 2, 8, 4, 9, 1])
-          .enter()
-          .append('div')
-          .text(n => `$${n.toFixed(2)}`)
-          .style('background-color', '#000')
-          .style('color', '#ffff')
-          .style('padding', '1em')
-          .style('margin', '2px')
-          .style('width', n => `${n * 10 }%`)
-        
+      //Draws bars
+      d3.select("#viz")
+        .selectAll("div")
+        .data([5, 6, 2, 8, 4, 9, 1])
+        .enter()
+        .append("div")
+        .text((n) => `$${n.toFixed(2)}`)
+        .style("background-color", "#000")
+        .style("color", "#ffff")
+        .style("padding", "1em")
+        .style("margin", "2px")
+        .style("width", (n) => `${n * 10}%`);
     </script>
-</body>
-
+  </body>
 </html>
