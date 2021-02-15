@@ -10,22 +10,37 @@
     <svg id="svg" width="500" height="500">
       <!-- SVG Objects here! -->
     </svg>
-
+    <svg id="svg2" width="500" height="500">
+      <!-- SVG Objects here! -->
+    </svg>
     <div id="viz">
       <!-- D3 elements here! -->
     </div>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script>
-      //Draws circles
-      d3.select("#svg")
-        .style('border', '1px solid')
+      //Draws circle based on titanic data
+      const p = d3.json("../data/titanic-passengers.json");
+      p.then((json) => {
+        d3.select("#svg")
+          .selectAll("circle")
+          .data(json)
+          .enter()
+          .append("circle")
+          .attr("r", "3px")
+          .attr("fill", "#000")
+          .attr("cx", (p, i) => (500 / json.length) * i)
+          .attr("cy", (p, i) => (p.fields.age / 100) * 500);
+      });
+      // Draws circles
+      d3.select("#svg2")
+        .style("border", "1px solid")
         .selectAll("circle")
         .data([5, 6, 2, 8, 4, 9, 1])
         .enter()
         .append("circle")
         .attr("r", "30px")
         .attr("cx", (n, i) => `${i * 100}px`)
-        .attr("cy", val => `${val / 10 * 500}px`)
+        .attr("cy", (val) => `${(val / 10) * 500}px`)
         .attr("fill", "rgba(255, 0, 0, 0.5)")
         .attr("storke-width", "3px")
         .attr("stroke", "black");
