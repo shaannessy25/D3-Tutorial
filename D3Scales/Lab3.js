@@ -11,7 +11,7 @@ d3.json('../data/monthlySales.json')
     // d3.scaleLinear().domain().range()
     const xScale = d3.scaleLinear()
       .domain([1, 10]) // Input values
-      .range([0, 500]) // Output values 
+      .range([12, 470]) // Output values 
       // Challenge - adjust the range to move the first and last elements insude the border
 
     // Challenge - Make a yScale function
@@ -19,7 +19,7 @@ d3.json('../data/monthlySales.json')
     // Range is 0 to 400
     const yScale = d3.scaleLinear()
       .domain(d3.extent(data, d => d.sales)) // Input values
-      .range([0, 400]) // Output values 
+      .range([20, 375]) // Output values 
 
     // 
     d3.select('#example-0')
@@ -29,10 +29,10 @@ d3.json('../data/monthlySales.json')
       .enter()
       .append('circle')
       .attr('r', '10px')
-      .attr('fill', '#000')
+      .attr('fill', 'lightgray')
       // Use the scale here
       .attr('cx', d => xScale(d.month))
-      .attr('cy', 200)
+      .attr('cy', d => yScale(d.sales))
     
     // An ordinal scale chooses values from a list
     const monthScale = d3.scaleOrdinal()
@@ -52,7 +52,7 @@ d3.json('../data/monthlySales.json')
       // Use the xScale to position the name on the x
       .attr('x', d => xScale(d.month))
       // Challenge - Use your yScale to position on the y
-      .attr('y', 200)
+      .attr('y', d => yScale(d.sales))
 
   })
 
